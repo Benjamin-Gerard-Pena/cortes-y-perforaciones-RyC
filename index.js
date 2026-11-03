@@ -1,21 +1,26 @@
 fetch('zona-superior.html')
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) throw new Error("No se encontró zona-superior.html");
+        return response.text();
+    })
     .then(text => {
-        document.getElementById('zona-superior').innerHTML = text;
+        const contenedorHeader = document.getElementById('zona-superior');
+        if (contenedorHeader) {
+            contenedorHeader.innerHTML = text;
+        }
 
         const dropdownToggle = document.querySelector('.dropdown-toggle');
         const dropdown = document.querySelector('.dropdown');
 
         if (dropdownToggle && dropdown) {
             dropdownToggle.addEventListener('click', function(e) {
-                if (window.innerWidth <= 850 && !dropdown.classList.contains('active')) {
+                if (window.innerWidth <= 850) {
                     e.preventDefault();
                     e.stopPropagation();
-                    dropdown.classList.add('active');
+                    dropdown.classList.toggle('active');
                 }
             });
 
-            // Cerrar el submenú si tocan afuera en móvil
             document.addEventListener('click', function(e) {
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove('active');
@@ -37,4 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.getAttribute('href') === '#') {
+            e.preventDefault();
+        }
+    });
 });
