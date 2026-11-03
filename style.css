@@ -11,21 +11,27 @@ body {
     flex-direction: column;
     background-color: #ffffff;
     color: var(--text-color);
-    /* Tipografía moderna, altamente legible desde cualquier ángulo */
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Barra Superior */
 .zona-superior {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 100%;
     height: 90px;
-    padding: 0 50px;
+    padding: 0 40px;
     box-sizing: border-box;
     background-color: var(--primary-red);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.contenedor-logo {
+    position: absolute;
+    left: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .contenedor-logo img {
@@ -36,30 +42,30 @@ body {
     padding: 4px 8px;
     border-radius: 4px;
 }
-.contenedor-logo {
-    position: absolute;
-    left: 40px;
+
+.nav-menu {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-/* Menú de Botones Funcionales Alineados */
-.nav-menu ul {
+.nav-menu > ul {
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
     margin: 0;
     padding: 0;
 }
 
-.nav-menu li {
+.nav-menu > ul > li {
     display: flex;
     align-items: center;
+    position: relative;
+    padding: 10px 0;
 }
 
-/* Estilo de Botón Pro para cada pestaña */
 .btn-nav {
     color: white;
     text-decoration: none;
@@ -76,9 +82,11 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    white-space: nowrap;
 }
 
-.btn-nav:hover {
+.btn-nav:hover,
+.dropdown:hover .btn-nav {
     background-color: white;
     color: var(--primary-red);
     border-color: white;
@@ -90,7 +98,51 @@ body {
     transform: translateY(0);
 }
 
-/* Contenido Principal Estilo Flesan */
+.nav-menu ul.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    min-width: 210px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    z-index: 1000;
+    border: 1px solid #e0e0e0;
+}
+
+.dropdown-menu li {
+    width: 100%;
+    display: block;
+}
+
+.dropdown-menu li a {
+    color: var(--dark-gray);
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--primary-red);
+    color: white;
+}
+
+.nav-menu .dropdown:hover > ul.dropdown-menu,
+.nav-menu .dropdown.active > ul.dropdown-menu {
+    display: block;
+}
+
 .main-container {
     max-width: 1200px;
     margin: 40px auto;
@@ -136,18 +188,38 @@ h1 {
         height: auto;
         padding: 20px;
         gap: 15px;
+        position: relative;
     }
 
-    .nav-menu ul {
+    .contenedor-logo {
+        position: static;
+        margin-bottom: 5px;
+    }
+
+    .nav-menu > ul {
         flex-direction: column;
         width: 100%;
         gap: 8px;
+    }
+
+    .nav-menu > ul > li {
+        width: 100%;
+        padding: 0;
+        flex-direction: column;
     }
 
     .btn-nav {
         width: 100%;
         text-align: center;
         box-sizing: border-box;
+    }
+
+    .nav-menu ul.dropdown-menu {
+        position: static;
+        transform: none;
+        width: 100%;
+        margin-top: 4px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 }
 
@@ -182,7 +254,6 @@ h1 {
     color: #444;
 }
 
-/* Footer */
 footer {
     background-color: var(--dark-gray);
     color: white;
