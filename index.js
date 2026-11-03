@@ -7,12 +7,15 @@ fetch('zona-superior.html')
         const dropdown = document.querySelector('.dropdown');
 
         if (dropdownToggle && dropdown) {
-            // Abrir/cerrar al tocar el botón en móviles
             dropdownToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                dropdown.classList.toggle('active');
+                if (window.innerWidth <= 850 && !dropdown.classList.contains('active')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropdown.classList.add('active');
+                }
             });
+
+            // Cerrar el submenú si tocan afuera en móvil
             document.addEventListener('click', function(e) {
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove('active');
@@ -21,3 +24,17 @@ fetch('zona-superior.html')
         }
     })
     .catch(error => console.error("Error al cargar la zona superior:", error));
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnRetroceder = document.querySelector('.btn-retroceder');
+    if (btnRetroceder) {
+        btnRetroceder.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.history.length > 1 && document.referrer !== "") {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    }
+});
