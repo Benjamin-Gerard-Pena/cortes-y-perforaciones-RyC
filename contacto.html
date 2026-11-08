@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Perforaciones RyCortes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="zona-superior"></div>
+
+<section class="header-corporativo">
+    <div class="header-corporativo-inner">
+        <span class="hero-badge">Atención Comercial y Presupuestos</span>
+        <h1>Contacto y Cotizaciones Técnicas</h1>
+        <p>
+            Comunícate directamente con nuestra área de operaciones o envíanos las especificaciones de tu proyecto para coordinar una evaluación o cotización formal.
+        </p>
+    </div>
+</section>
+
+<main class="main-container">
+
+    <div class="top-bar-pagina">
+        <a href="index.html" class="btn-retroceder">
+            &#8592; Volver al Inicio
+        </a>
+    </div>
+
+    <div class="contacto-grid">
+
+        <div class="contacto-info-panel">
+            <h2>Canales Directos de Atención</h2>
+            <p class="contacto-intro">
+                Disponemos de líneas directas para consultas técnicas urgentes en terreno, licitaciones y solicitudes de cotización comercial.
+            </p>
+
+            <div class="info-bloque">
+                <h3>Teléfonos de Contacto</h3>
+                <div class="dato-item">
+                    <span class="dato-etiqueta">Operaciones y Terreno:</span>
+                    <a href="tel:+56900000001" class="dato-valor">+56 9 0000 0001</a>
+                </div>
+                <div class="dato-item">
+                    <span class="dato-etiqueta">Comercial y Presupuestos:</span>
+                    <a href="tel:+56900000002" class="dato-valor">+56 9 0000 0002</a>
+                </div>
+            </div>
+
+            <div class="info-bloque">
+                <h3>Correos Electrónicos</h3>
+                <div class="dato-item">
+                    <span class="dato-etiqueta">Cotizaciones y Proyectos:</span>
+                    <a href="mailto:contacto@rycortes.cl" class="dato-valor">contacto@rycortes.cl</a>
+                </div>
+                <div class="dato-item">
+                    <span class="dato-etiqueta">Gerencia y Operaciones:</span>
+                    <a href="mailto:operaciones@rycortes.cl" class="dato-valor">operaciones@rycortes.cl</a>
+                </div>
+            </div>
+
+            <div class="info-bloque">
+                <h3>Cobertura y Disponibilidad</h3>
+                <div class="dato-item">
+                    <span class="dato-etiqueta">Ubicación Base:</span>
+                    <span class="dato-texto">Región Metropolitana, Santiago (Despliegue a faenas en todo Chile)</span>
+                </div>
+                <div class="dato-item">
+                    <span class="dato-etiqueta">Modalidad de Trabajo:</span>
+                    <span class="dato-texto">Horario hábil de oficina y turnos especiales 24/7 para paradas de planta y minería.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contacto-form-panel">
+            <h2>Formulario de Solicitud Técnica</h2>
+            <p class="form-subtitulo">
+                Completa tus datos de contacto y una breve descripción del requerimiento. Nuestro equipo te responderá a la brevedad.
+            </p>
+
+            <form id="form-cotizacion" class="formulario-ryc">
+                <div class="form-grupo">
+                    <label for="nombre">Nombre Completo / Empresa *</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Constructora / Juan Pérez" required>
+                </div>
+
+                <div class="form-fila-doble">
+                    <div class="form-grupo">
+                        <label for="telefono">Teléfono de Contacto *</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+56 9 XXXX XXXX" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="correo">Correo Electrónico *</label>
+                        <input type="email" id="correo" name="correo" placeholder="nombre@empresa.cl" required>
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="servicio">Especialidad Requerida</label>
+                    <select id="servicio" name="servicio">
+                        <option value="Corte con Hilo Diamantado">Corte con Hilo Diamantado</option>
+                        <option value="Corte con Disco Diamantado (Muro / Losa)">Corte con Disco Diamantado (Muro / Losa)</option>
+                        <option value="Perforación con Testiguera">Perforación con Testiguera</option>
+                        <option value="Demolición Técnica Controlada">Demolición Técnica Controlada</option>
+                        <option value="Servicios en Fundición / Minería">Servicios en Fundición / Minería</option>
+                        <option value="Otro requerimiento técnico">Otro requerimiento técnico</option>
+                    </select>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="descripcion">Breve Descripción del Trabajo o Faena *</label>
+                    <textarea id="descripcion" name="descripcion" rows="5" placeholder="Indícanos ubicación aproximada, tipo de estructura (hormigón, acero, cobre), dimensiones estimadas o cualquier detalle relevante..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar-form">Enviar Solicitud de Contacto</button>
+                <p id="mensaje-exito" class="mensaje-confirmacion">Preparando el envío de tu solicitud...</p>
+            </form>
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Perforaciones RyCortes. Especialistas en Cortes Diamantados y Demolición. Todos los derechos reservados.</p>
+</footer>
+
+<script src="index.js"></script>
+<script>
+    document.getElementById('form-cotizacion').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nombre = document.getElementById('nombre').value;
+        const telefono = document.getElementById('telefono').value;
+        const correo = document.getElementById('correo').value;
+        const servicio = document.getElementById('servicio').value;
+        const descripcion = document.getElementById('descripcion').value;
+
+        const asunto = encodeURIComponent("Solicitud de Cotización: " + servicio + " - " + nombre);
+        const cuerpo = encodeURIComponent(
+            "Nombre / Empresa: " + nombre + "\n" +
+            "Teléfono: " + telefono + "\n" +
+            "Correo: " + correo + "\n" +
+            "Servicio Requerido: " + servicio + "\n\n" +
+            "Descripción del requerimiento:\n" + descripcion
+        );
+
+        const aviso = document.getElementById('mensaje-exito');
+        aviso.style.display = 'block';
+
+        window.location.href = "mailto:contacto@rycortes.cl?subject=" + asunto + "&body=" + cuerpo;
+    });
+</script>
+</body>
+</html>
