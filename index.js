@@ -49,4 +49,61 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         }
     });
+
+    const formCotizacion = document.getElementById('form-cotizacion');
+    if (formCotizacion) {
+        formCotizacion.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const CORREO_PRINCIPAL = "contacto@rycortes.cl";
+            const CORREO_RESPALDO = "operaciones@rycortes.cl";
+
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const correo = document.getElementById('correo').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const btnSubmit = document.getElementById('btn-submit-cotizacion');
+            const aviso = document.getElementById('mensaje-exito');
+
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "Enviando solicitud...";
+
+            fetch("https://formsubmit.co/ajax/" + CORREO_PRINCIPAL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    _subject: "Nuevo Proyecto RyCortes - " + nombre,
+                    _cc: CORREO_RESPALDO,
+                    _replyto: correo,
+                    Nombre_o_Empresa: nombre,
+                    Telefono_Cliente: telefono,
+                    Correo_Cliente: correo,
+                    Descripcion_del_Proyecto: descripcion
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    aviso.style.display = "block";
+                    aviso.textContent = "¡Solicitud enviada con éxito! Nos pondremos en contacto a la brevedad.";
+                    formCotizacion.reset();
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = "Enviar Requerimiento";
+                })
+                .catch(error => {
+                    const asunto = encodeURIComponent("Evaluación de Proyecto - " + nombre);
+                    const cuerpo = encodeURIComponent(
+                        "Nombre / Empresa: " + nombre + "\n" +
+                        "Teléfono: " + telefono + "\n" +
+                        "Correo: " + correo + "\n\n" +
+                        "Descripción del Proyecto:\n" + descripcion
+                    );
+                    window.location.href = "mailto:" + CORREO_PRINCIPAL + "?cc=" + CORREO_RESPALDO + "&subject=" + asunto + "&body=" + cuerpo;
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = "Enviar Requerimiento";
+                });
+        });
+    }
 });
